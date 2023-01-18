@@ -3,5 +3,6 @@ from django.shortcuts import render
 
 # Create your views here.
 def home_view(request, *arg, **kwargs):
-  return HttpResponse()
+  print(kwargs)
+  return HttpResponse("<h1>Hello World!!!</h1>")
 
