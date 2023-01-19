@@ -1,4 +1,4 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render
 from .models import Tweet
 
@@ -20,3 +20,18 @@ def tweet_detail_view(request, *args, **kwargs):
   except:
     raise Http404
   return HttpResponse(f"<div>Tweet details: No <strong>{kwargs['tweet_id']}</strong> and content <strong>{obj.content}</strong></div>")
+
+def tweet_detail_api(request, tweet_id, *args, **kwargs):
+  """
+  Organize Rest API 
+  """
+  data = {"id": tweet_id}
+  try:
+    obj = Tweet.objects.get(id=tweet_id)
+    data['content'] = obj.content
+    status = 200
+  except:
+    data['message'] = 'tweet with that id is not found!'
+    status = 404
+  return JsonResponse(data, status=status)
+    
