@@ -1,4 +1,4 @@
-
+# nodemon --exec python train.py
 def powersum(power, *args):
     total = 0
     for i in args:
