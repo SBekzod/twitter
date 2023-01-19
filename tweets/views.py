@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from .models import Tweet
 
@@ -14,8 +14,9 @@ def tweet_check(request, tweet_id, *args, **kwargs):
   return HttpResponse(f"<div>Tweet on param: <strong>{tweet_id}</strong> and query <strong>{request.GET['nick']}</strong></div>")
 
 def tweet_detail_view(request, *args, **kwargs):
-  print('kwarngs:', kwargs)
-  obj = Tweet.objects.get(id=kwargs['tweet_id'])
+  try:
+    print('kwarngs:', kwargs)
+    obj = Tweet.objects.get(id=kwargs['tweet_id'])
+  except:
+    raise Http404
   return HttpResponse(f"<div>Tweet details: No <strong>{kwargs['tweet_id']}</strong> and content <strong>{obj.content}</strong></div>")
-
-
