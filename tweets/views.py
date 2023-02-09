@@ -7,6 +7,14 @@ def home_view(request, *arg, **kwargs):
   print(kwargs)
   return render(request, 'pages/home.html', context={"name": "martin"}, status=200) 
 
+def tweets_list_api(request, *args, **kwargs):
+  qs = Tweet.objects.all()
+  tweets_list = [{"id": x.id, "content": x.content} for x in qs]
+  data = {
+    "response": tweets_list
+  }
+  return JsonResponse(data)
+
 def tweet_detail_api(request, tweet_id, *args, **kwargs):
   """
   Organize Rest API 
@@ -20,8 +28,6 @@ def tweet_detail_api(request, tweet_id, *args, **kwargs):
     data['message'] = 'tweet with that id is not found!'
     status = 404
   return JsonResponse(data, status=status)
-
-
 
 def tweet_check(request, tweet_id, *args, **kwargs): 
   print(request.GET['nick'])  
