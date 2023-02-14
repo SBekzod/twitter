@@ -5,7 +5,12 @@ from .models import Tweet
 # Create your views here.
 def home_view(request, *arg, **kwargs):
   print(kwargs)
-  return render(request, 'pages/home.html', context={"name": "martin"}, status=200) 
+  qs = Tweet.objects.all()
+  tweets_list = [{"id": x.id, "content": x.content} for x in qs]
+  data = {
+    "response": tweets_list
+  }
+  return render(request, 'pages/home.html', context=data, status=200) 
 
 def tweets_list_api(request, *args, **kwargs):
   qs = Tweet.objects.all()
