@@ -54,6 +54,7 @@ xhr.open(method, url)
 xhr.onload = function() {
     const serverResponse = xhr.response
     const listedItems = serverResponse.response // array
+    console.log("listedItems:", listedItems);   
     var finalTweetStr = ""
     var i;
     for (i=0;i<listedItems.length; i++) {

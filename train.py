@@ -5,14 +5,16 @@ def powersum(power, *args):
         total += pow(i, power)
     return total
 
+
 print(powersum(2, 3, 4))
-print('======================')
+print("======================")
+
 
 def myFun(**kwargs):
-    print('KWARGS:', kwargs)
+    print("KWARGS:", kwargs)
     for key, value in kwargs.items():
         print("%s == %s" % (key, value))
- 
- 
+
+
 # Driver code
-myFun(first='Geeks', mid='for', last='Geeks')
+myFun(first="Geeks", mid="for", last="Geeks")

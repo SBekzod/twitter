@@ -1,0 +1,8 @@
+{
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "python.formatting.autopep8Path": "autopep8",
+  "editor.defaultFormatter": "ms-python.python",
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black"
+}

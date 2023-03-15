@@ -5,10 +5,11 @@ name = "pypi"
 
 [packages]
 django = "==2.2"
+black = "*"
 
 [dev-packages]
 pylint = "*"
 
 [requires]
 python_version = "3.8"
-python_full_version = "3.8.9"
+python_full_version = "3.8.16"
