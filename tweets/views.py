@@ -1,6 +1,6 @@
 import random
 from django.http import HttpResponse, Http404, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .form import TweetForm
 from .models import Tweet
@@ -14,10 +14,14 @@ def home_view(request, *args, **kwargs):
 def tweet_create_view(request, *args, **kwargs):
     form = TweetForm(request.POST or None)
     print(f"post is here ${request.POST}")
+    next_url = request.POST.get("next") or None
+    print(f"next_url: ${next_url}")
     if form.is_valid():
         obj = form.save(commit=False)
         # do other form related logic
         obj.save()
+        if next_url != None:
+            return redirect(next_url)
         form = TweetForm()
     return render(request, "components/form.html", context={"form": form})
 
