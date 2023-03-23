@@ -1,6 +1,5 @@
 from django import forms
 
-
 from .models import Tweet
 
 MAX_TWEET_LENGTH = 240
