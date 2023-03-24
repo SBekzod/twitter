@@ -32,23 +32,29 @@ this is amazing!!!!
 
 <script>
 function handleTweetCreateFormDidSumbit(event) {
-    event.preventDefault();
-    const myForm = event.target;
-    const myFormData = new FormData(myForm);
-    const url = myForm.getAttribute("action");
-    const method = myForm.getAttribute("method");
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, url);
+    event.preventDefault()
+    const myForm = event.target
+    const myFormData = new FormData(myForm)
+    const url = myForm.getAttribute("action")
+    const method = myForm.getAttribute("method")
+    const xhr = new XMLHttpRequest()
+    const responseType = "json"
+    xhr.responseType = responseType
+    xhr.open(method, url)
     xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
     xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
     xhr.onload = function() {
-        const serverResponse = xhr.response;
-        console.log("Response:", xhr);
-        const tweetsEl = document.getElementById("tweets");
-        loadTweets(tweetsEl);
+        if (xhr.status === 201) {
+            const newTweetJson = xhr.response
+            console.log(newTweetJson.likes)
+            const newTweetElement = formatTweetElement(newTweetJson)
+            console.log(newTweetElement)
+            tweetsEle.prepend(newTweetElement)
+        }
+        
     }
-    xhr.send(myFormData);
-}   
+    xhr.send(myFormData)
+}  
 const tweetCreateFormEle = document.getElementById('tweet-create-form');
 tweetCreateFormEle.addEventListener('submit', handleTweetCreateFormDidSumbit);
 
