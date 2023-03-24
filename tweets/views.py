@@ -19,11 +19,12 @@ def tweet_create_view(request, *args, **kwargs):
     form = TweetForm(request.POST or None)
     print(f"post is here ${request.POST}")
     next_url = request.POST.get("next") or None
-    print(f"next_url: ${next_url}")
     if form.is_valid():
         obj = form.save(commit=False)
         # do other form related logic
         obj.save()
+        if request.is_ajax():
+            return JsonResponse({}, status=201)
         if next_url != None and is_safe_url(next_url, ALLOWED_HOSTS):
             return redirect(next_url)
         form = TweetForm()
