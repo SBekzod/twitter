@@ -20,6 +20,8 @@ from tweets.views import (
     home_view, tweet_detail_view, tweet_list_view, tweet_create_view
 )
 
+# ROUTER
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
